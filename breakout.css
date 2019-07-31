@@ -1,0 +1,70 @@
+body {
+	font-family: 'Press Start 2P', cursive;
+}
+
+
+
+* { 
+	padding: 0; 
+	margin: 0; 
+}
+
+canvas { 
+	background: #F0ECEB; 
+	display: block; 
+	margin: 20px auto;
+}
+
+h1 {
+	text-align: center; 
+	font-size: 2.5em; 
+	line-height: 1.1; 
+	font-weight: normal; 
+	color: #F0ECEB; 
+	background: #66A7C5;
+	margin: 0;
+	text-transform: uppercase;
+	padding: 20px 0;
+}
+
+h2 {
+	text-align: center;
+	font-size: 1.17em;  
+	line-height: 1.1; 
+	font-weight: normal; 
+	color: #F0ECEB; 
+	background: #66A7C5;
+	margin: 0;
+	text-transform: uppercase;
+	padding: 0 0 20px 0;
+}
+
+#stripe {
+	background-color: #EE3233; 
+	height: 30px;
+	text-align: center; 
+}
+
+.selected {
+	background: #6C7476; 
+}
+
+button {
+	border: none; 
+	background: none;
+	text-transform: uppercase;
+	height: 100%; 
+	font-weight: 700; 
+	color: #F0ECEB;
+	letter-spacing: 1px; 
+	font-size: inherit;
+	transition: all 0.3s; 
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	outline: none;
+}
+
+button:hover {
+	color: #F0ECEB;
+	background: #6C7476;
+}

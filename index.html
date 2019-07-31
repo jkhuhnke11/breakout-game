@@ -3,12 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <title>Simple Breakout Game</title>
-    <style>
-        * { padding: 0; margin: 0; }
-        canvas { background: #eee; display: block; margin: 0 auto;}
-    </style>
+
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="breakout.css">
+
 </head>
 <body>
+	<h1>Breakout</h1>
+	<h2>Destroy all the bricks to win</h2>
+
+	<div id="stripe">
+		<button id="reset">New Game</button>
+		<span id="message"></span>
+		<button class="mode selected">Easy</button>
+		<button class="mode">Normal</button>
+		<button class="mode" >Hard</button>
+	</div>
 
     <canvas id = "myCanvas" width="480" height="320"></canvas>
 

@@ -9,8 +9,8 @@ var ctx = canvas.getContext("2d");
 // --------------------------------------------------
 var x = canvas.width/2; 
 var y = canvas.height-30; 
-var dx = 2; 
-var dy = -2; 
+var dx = null; 
+var dy = null; 
 var ballRadius = 10; 
 
 // --------------------------------------------------
@@ -51,8 +51,43 @@ var lives = 3;
 // --------------------------------------------------
 // Keypress Information
 // --------------------------------------------------
-var rightPressed = false; 
-var leftPressed = false; 
+var rightPressed = false, 
+    leftPressed  = false; 
+
+// --------------------------------------------------
+// Header Buttons
+// --------------------------------------------------
+var resetButton = document.querySelector("#reset"),
+    modeButtons = document.querySelectorAll(".mode");
+
+// --------------------------------------------------
+// Initializes Game & Sets Up Difficulty Buttons
+// --------------------------------------------------
+
+resetButton.addEventListener("click", function() {
+    document.location.reload();  
+});
+
+setUpModeButtons(); 
+
+function setUpModeButtons(){
+    for(var i = 0; i < modeButtons.length; i++){
+        modeButtons[i].addEventListener("click", function(){
+            modeButtons[0].classList.remove("selected"); 
+            modeButtons[1].classList.remove("selected");
+            modeButtons[2].classList.remove("selected"); 
+            this.classList.add("selected");
+            //Sets level difficulty 
+            if(this.textContent === "Easy"){
+                dx = 2; dy = -2; 
+            } else if(this.textContent === "Normal"){
+                dx = 3; dy = -3; 
+            } else {
+                dx = 4; dy = -4;  
+            } 
+        }); 
+    }
+}
 
 // --------------------------------------------------
 // Drawing Functions
@@ -60,7 +95,7 @@ var leftPressed = false;
 function drawBall(){
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#66A7C5";
     ctx.fill();
     ctx.closePath();
 }
@@ -68,7 +103,7 @@ function drawBall(){
 function drawPaddle(){
     ctx.beginPath(); 
     ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight); 
-    ctx.fillStyle = "#0095DD"; 
+    ctx.fillStyle = "#6C7476"; 
     ctx.fill(); 
     ctx.closePath(); 
 }
@@ -83,7 +118,7 @@ function drawBricks(){
                 bricks[c][r].y = brickY;
                 ctx.beginPath();
                 ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                ctx.fillStyle = "#0095DD";
+                ctx.fillStyle = "#EE3233";
                 ctx.fill();
                 ctx.closePath(); 
             } 
@@ -115,13 +150,11 @@ function draw(){
         } else {
             lives--; 
             if(!lives){
-                alert("GAME OVER"); 
+                resetButton.textContent = "Try Again?" 
                 document.location.reload();  
             } else {
                 x = canvas.width/2; 
                 y = canvas.height - 30; 
-                dx = 2; 
-                dy = -2; 
                 paddleX = (canvas.width - paddleWidth)/2; 
             }
         }
@@ -169,8 +202,8 @@ function collisionDetection(){
                     b.status = 0; 
                     score++; 
                     if(score == brickRowCount * brickColumnCount){
-                        alert("YOU WIN!!!"); 
-                        document.location.reload(); 
+                        resetButton.textContent = "Play Again?"; 
+                        dx = 0; dy = 0;  
                     }
                 }
             }
@@ -183,7 +216,7 @@ function collisionDetection(){
 // --------------------------------------------------
 function drawScore(){
     ctx.font = "16px Arial"; 
-    ctx.fillStyle = "#0095DD"; 
+    ctx.fillStyle = "#6C7476"; 
     ctx.fillText("Score: " + score, 8, 20); 
 }
 
@@ -192,7 +225,7 @@ function drawScore(){
 // --------------------------------------------------
 function drawLives(){
     ctx.font = "16px Arial"; 
-    ctx.fillStyle = "#0095DD"; 
+    ctx.fillStyle = "#6C7476"; 
     ctx.fillText("Lives: " + lives, canvas.width - 65, 20); 
 }
 
